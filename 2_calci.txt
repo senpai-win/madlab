@@ -1,183 +1,3 @@
-package com.example.prgm2_simplecalculator;
-
-import androidx.appcompat.app.AppCompatActivity;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.EditText;
-
-public class MainActivity extends AppCompatActivity {
-
-    EditText txtValue;
-    String operatorValue;
-    Boolean isNewOperation = false;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        txtValue = (EditText) findViewById(R.id.calculator_txt_valuetext);
-        txtValue.setShowSoftInputOnFocus(false);
-        txtValue.setSingleLine(false);
-    }
-
-
-
-
-    public void numberClick(View view) {
-
-        //Used to automatically reset the value for next Operation
-        if(isNewOperation) {
-            isNewOperation = false;
-            txtValue.setText("");
-        }
-
-        String value = txtValue.getText().toString();
-
-        switch(view.getId()) {
-            case R.id.calculator_btn_zero:
-                value += "0";
-                break;
-
-            case R.id.calculator_btn_One:
-                value += "1";
-                break;
-
-            case R.id.calculator_btn_Two:
-                value += "2";
-                break;
-
-            case R.id.calculator_btn_Three:
-                value += "3";
-                break;
-
-            case R.id.calculator_btn_four:
-                value += "4";
-                break;
-
-            case R.id.calculator_btn_five:
-                value += "5";
-                break;
-
-            case R.id.calculator_btn_six:
-                value += "6";
-                break;
-
-            case R.id.calculator_btn_seven:
-                value += "7";
-                break;
-
-            case R.id.calculator_btn_eight:
-                value += "8";
-                break;
-
-            case R.id.calculator_btn_nine:
-                value += "9";
-                break;
-
-            case R.id.calculator_btn_add:
-                value += "+";
-                break;
-
-            case R.id.calculator_btn_subtract:
-                value += "-";
-                break;
-
-            case R.id.calculator_btn_multiple:
-                value += "*";
-                break;
-
-            case R.id.calculator_btn_divide:
-                value += "/";
-                break;
-
-            case R.id.calculator_btn_dot:
-                value += ".";
-                break;
-        }
-        txtValue.setText(value);
-    }
-
-    public void operatorClick(View view) {
-
-        String value = txtValue.getText().toString();
-        switch (view.getId()) {
-            case R.id.calculator_btn_add:
-                operatorValue = "+";
-
-                value += "+";
-                break;
-
-            case R.id.calculator_btn_subtract:
-                operatorValue = "-";
-                value += "-";
-                break;
-
-            case R.id.calculator_btn_divide:
-                operatorValue = "/";
-                value += "/";
-                break;
-
-            case R.id.calculator_btn_multiple:
-                operatorValue = "*";
-                value += "*";
-                break;
-        }
-        txtValue.setText(value);
-    }
-
-    public void clearButton(View view) {
-        txtValue.setText("");
-    }
-
-    public void equalsClick(View view) {
-        String value = txtValue.getText().toString();
-        double calculatedValue = 0.0;
-        String[] separated;
-        switch (operatorValue) {
-            case "+":
-                separated = value.split("\\+");
-                calculatedValue = Double.parseDouble(separated[0]) + Double.parseDouble(separated[1]);
-                break;
-
-            case "-":
-                separated = value.split("-");
-                calculatedValue = Double.parseDouble(separated[0]) - Double.parseDouble(separated[1]);
-                break;
-
-            case "*":
-                separated = value.split("\\*");
-                calculatedValue = Double.parseDouble(separated[0]) * Double.parseDouble(separated[1]);
-                break;
-
-            case "/":
-                separated = value.split("/");
-                calculatedValue = Double.parseDouble(separated[0]) / Double.parseDouble(separated[1]);
-                break;
-        }
-
-        //Restrict the Decimal value to 2 digit. Eg : 23.34567 -> 23.34
-        String finalValue = String.format("%.2f",calculatedValue);
-
-        txtValue.setText(value +"\n"+ finalValue);
-
-
-        //If you have to display int value without decimal -
-        //Check if the finalResult is decimal or not then convert to Int and display
-
-        //if((calculatedValue %1 ) == 0) {}
-        //else
-        //txtValue.setText(value +"\n"+ finalValue);
-
-        isNewOperation = true;
-    }
-}
-
-
-
-
-
-
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
@@ -481,3 +301,183 @@ public class MainActivity extends AppCompatActivity {
         android:textSize="20dp" />
 
 </RelativeLayout>
+
+
+
+
+
+
+package com.example.prgm2_simplecalculator;
+
+import androidx.appcompat.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.EditText;
+
+public class MainActivity extends AppCompatActivity {
+
+    EditText txtValue;
+    String operatorValue;
+    Boolean isNewOperation = false;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        txtValue = (EditText) findViewById(R.id.calculator_txt_valuetext);
+        txtValue.setShowSoftInputOnFocus(false);
+        txtValue.setSingleLine(false);
+    }
+
+
+
+
+    public void numberClick(View view) {
+
+        //Used to automatically reset the value for next Operation
+        if(isNewOperation) {
+            isNewOperation = false;
+            txtValue.setText("");
+        }
+
+        String value = txtValue.getText().toString();
+
+        switch(view.getId()) {
+            case R.id.calculator_btn_zero:
+                value += "0";
+                break;
+
+            case R.id.calculator_btn_One:
+                value += "1";
+                break;
+
+            case R.id.calculator_btn_Two:
+                value += "2";
+                break;
+
+            case R.id.calculator_btn_Three:
+                value += "3";
+                break;
+
+            case R.id.calculator_btn_four:
+                value += "4";
+                break;
+
+            case R.id.calculator_btn_five:
+                value += "5";
+                break;
+
+            case R.id.calculator_btn_six:
+                value += "6";
+                break;
+
+            case R.id.calculator_btn_seven:
+                value += "7";
+                break;
+
+            case R.id.calculator_btn_eight:
+                value += "8";
+                break;
+
+            case R.id.calculator_btn_nine:
+                value += "9";
+                break;
+
+            case R.id.calculator_btn_add:
+                value += "+";
+                break;
+
+            case R.id.calculator_btn_subtract:
+                value += "-";
+                break;
+
+            case R.id.calculator_btn_multiple:
+                value += "*";
+                break;
+
+            case R.id.calculator_btn_divide:
+                value += "/";
+                break;
+
+            case R.id.calculator_btn_dot:
+                value += ".";
+                break;
+        }
+        txtValue.setText(value);
+    }
+
+    public void operatorClick(View view) {
+
+        String value = txtValue.getText().toString();
+        switch (view.getId()) {
+            case R.id.calculator_btn_add:
+                operatorValue = "+";
+
+                value += "+";
+                break;
+
+            case R.id.calculator_btn_subtract:
+                operatorValue = "-";
+                value += "-";
+                break;
+
+            case R.id.calculator_btn_divide:
+                operatorValue = "/";
+                value += "/";
+                break;
+
+            case R.id.calculator_btn_multiple:
+                operatorValue = "*";
+                value += "*";
+                break;
+        }
+        txtValue.setText(value);
+    }
+
+    public void clearButton(View view) {
+        txtValue.setText("");
+    }
+
+    public void equalsClick(View view) {
+        String value = txtValue.getText().toString();
+        double calculatedValue = 0.0;
+        String[] separated;
+        switch (operatorValue) {
+            case "+":
+                separated = value.split("\\+");
+                calculatedValue = Double.parseDouble(separated[0]) + Double.parseDouble(separated[1]);
+                break;
+
+            case "-":
+                separated = value.split("-");
+                calculatedValue = Double.parseDouble(separated[0]) - Double.parseDouble(separated[1]);
+                break;
+
+            case "*":
+                separated = value.split("\\*");
+                calculatedValue = Double.parseDouble(separated[0]) * Double.parseDouble(separated[1]);
+                break;
+
+            case "/":
+                separated = value.split("/");
+                calculatedValue = Double.parseDouble(separated[0]) / Double.parseDouble(separated[1]);
+                break;
+        }
+
+        //Restrict the Decimal value to 2 digit. Eg : 23.34567 -> 23.34
+        String finalValue = String.format("%.2f",calculatedValue);
+
+        txtValue.setText(value +"\n"+ finalValue);
+
+
+        //If you have to display int value without decimal -
+        //Check if the finalResult is decimal or not then convert to Int and display
+
+        //if((calculatedValue %1 ) == 0) {}
+        //else
+        //txtValue.setText(value +"\n"+ finalValue);
+
+        isNewOperation = true;
+    }
+}
