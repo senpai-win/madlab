@@ -1,0 +1,124 @@
+AndroidManifest.xml
+
+ <uses-permission android:name="android.permission.SET_WALLPAPER" />
+ 
+ Create a folder 
+ Folder Name : assests [name should be specifically with this]
+ Sub Folder : wallpapers [any folder name, preferably in Lowercase]
+ 
+ Put all Screenshot photos in the above folder
+ 
+Activity.xml
+ 
+ <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ChangeWallpaperActivity"
+    android:background="@color/white">
+
+    <ImageView
+        android:id="@+id/wallpaper_img_bgwallpaper"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitXY"/>
+
+    <Button
+        android:id="@+id/wallpaper_btn_changewallpaper"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="10dp"
+        android:text="Change Wallpaper"
+        android:textSize="20dp"/>
+
+</RelativeLayout>
+
+
+Activity.java
+
+import androidx.appcompat.app.AppCompatActivity;
+import android.app.WallpaperManager;
+import android.content.res.AssetManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.Bundle;
+import android.os.Handler;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.Toast;
+import java.io.InputStream;
+import java.util.Random;
+
+public class ChangeWallpaperActivity extends AppCompatActivity {
+
+    //Image View for User Understanding [Not Mandatory]
+    ImageView imgView;
+    Button btnChangeWallpaper;
+    
+    //Array of File name
+    
+
+    Handler handler = new Handler();
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_change_wallpaper);
+
+        //Bind UI Elements
+        BindUiElements();
+        
+        btnChangeWallpaper.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try {
+                    handler.postDelayed(SelectedImage , 1000);;
+                }
+                catch (Exception ex) {
+                    Toast.makeText(ChangeWallpaperActivity.this, "Exception :"+ex.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
+
+    private void BindUiElements() {
+        imgView = (ImageView) findViewById(R.id.wallpaper_img_bgwallpaper);
+        btnChangeWallpaper = (Button) findViewById(R.id.wallpaper_btn_changewallpaper);
+    }
+
+    private Runnable SelectedImage = new Runnable() {
+        @Override
+        public void run() {
+            try {
+                AssetManager assetManager = getAssets();
+               String[] 
+                wallpaperFileName = assetManager.list("wallpapers");
+
+                //Generate a Random Number between 0 and Total Number of File available in the folder
+                int randomNumber = new Random().nextInt(wallpaperFileName.length);
+                
+                //WallpaperManager responsible for changing or assigning Wallpaper to phone programmatically 
+                WallpaperManager wallpaperManager = WallpaperManager.getInstance(getApplicationContext());
+
+                InputStream inputStream = assetManager.open("wallpapers/"+wallpaperFileName[randomNumber]);
+                Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
+                //Assing the Bitmap image to Wallpaper
+                wallpaperManager.setBitmap(bitmap);
+                
+                //Assign to Image View -> Optional only if needed
+                imgView.setImageBitmap(bitmap);
+
+                //Repeat the same task after a regular interval. Time in MilliSec 
+                handler.postDelayed(this,30000);
+            }
+            catch (Exception ex) {
+                Toast.makeText(ChangeWallpaperActivity.this, "Exception :"+ex.getMessage().toString(), Toast.LENGTH_SHORT).show();
+            }
+        }
+    };
+}
+
+

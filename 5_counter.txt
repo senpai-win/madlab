@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/counter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Counters"
+        android:textSize="35dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/texts"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/counter"
+        android:layout_marginTop="60dp"
+        android:gravity="center"
+        android:text="0"
+        android:textSize="50dp"></EditText>
+
+
+
+
+        <Button
+            android:id="@+id/start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="START"
+            android:textSize="25dp"
+            android:layout_below="@+id/texts"
+            android:layout_marginTop="30dp"
+            android:layout_centerHorizontal="true"
+            android:textStyle="bold"></Button>
+
+        <Button
+            android:id="@+id/stop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="STOP"
+            android:textSize="25dp"
+            android:layout_below="@+id/start"
+            android:layout_marginTop="50dp"
+            android:layout_centerHorizontal="true"
+            android:textStyle="bold"></Button>
+
+        <Button
+            android:id="@+id/reset"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="RESET"
+            android:textSize="25dp"
+            android:layout_below="@+id/stop"
+            android:layout_marginTop="50dp"
+            android:layout_centerHorizontal="true"
+            android:textStyle="bold"></Button>
+
+</RelativeLayout>
+
+package com.example.counter;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.os.Bundle;
+import android.os.CountDownTimer;
+import android.os.Handler;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
+
+public class MainActivity extends AppCompatActivity {
+    Button btnStart, btnStop , btnReset;
+    TextView txtCounter;
+    Handler handler=new Handler();
+    int count=0;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        BindUiElements();
+        btnStart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                handler.post(IncrementCount);
+            }
+        });
+
+        btnStop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                handler.removeCallbacks(IncrementCount);
+            }
+        });
+
+        btnReset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                count=0;
+                txtCounter.setText(String.valueOf(count));
+            }
+        });
+    }
+    private void BindUiElements(){
+        btnStart=(Button)findViewById(R.id.start);
+        btnStop=(Button)findViewById(R.id.stop);
+        btnReset=(Button)findViewById(R.id.reset);
+        txtCounter=(TextView)findViewById(R.id.texts);
+    }
+
+    private Runnable IncrementCount=new Runnable() {
+        @Override
+        public void run() {
+            try{
+                count++;
+                txtCounter.setText(String.valueOf(count));
+                handler.postDelayed(this,1000);
+
+            }
+            catch (Exception ex){
+                Toast.makeText(MainActivity.this, "Exception : "+ex.getMessage(),
+                        Toast.LENGTH_SHORT).show();
+            }
+        }
+    };
+}

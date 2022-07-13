@@ -1,0 +1,43 @@
+package com.example.speech;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.os.Bundle;
+import android.speech.tts.TextToSpeech;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+
+import java.util.Locale;
+
+public class MainActivity extends AppCompatActivity {
+    TextToSpeech txttospeech;
+    Button speechbtn;
+    EditText txtspeech;
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        txtspeech = (EditText)findViewById(R.id.Text);
+        speechbtn = (Button)findViewById(R.id.Speech_btn);
+
+        txttospeech = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
+            @Override
+            public void onInit(int status) {
+                if(status != TextToSpeech.ERROR) {
+                    txttospeech.setLanguage(Locale.ENGLISH);
+                }
+            }
+        });
+        speechbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String textValue =  txtspeech.getText().toString();
+                txttospeech.speak(textValue,TextToSpeech.QUEUE_FLUSH,null);
+            }
+        });
+    }
+}
