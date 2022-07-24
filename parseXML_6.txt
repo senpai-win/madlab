@@ -1,0 +1,300 @@
+XML & JSON Parser
+
+Create "assets" folder in <ProjectPath>\app\src\main
+
+Paste two files in it
+	citydetails.xml
+	citydetails.json
+
+activity_main.xml
+
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:background="@color/white">
+
+    <TextView
+        android:id="@+id/txt_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="XML - JSON Parser"
+        android:layout_alignParentTop="true"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:layout_margin="10dp"/>
+
+   <Button
+       android:id="@+id/btn_xmlparse"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:text="Parse XML Data"
+       android:layout_margin="10dp"
+       android:layout_below="@id/txt_header"/>
+
+    <Button
+        android:id="@+id/btn_jsonparse"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Parse JSON Data"
+        android:layout_margin="10dp"
+        android:layout_below="@id/txt_header"
+        android:layout_alignParentEnd="true"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:weightSum="2"
+        android:layout_below="@id/btn_xmlparse"
+        android:layout_margin="10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_weight="1">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="XML Data"
+                android:textColor="@color/black"
+                android:textSize="15dp"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/txt_xmldata"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:textColor="@color/black"
+                android:textSize="20dp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_weight="1">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="JSON Data"
+                android:textColor="@color/black"
+                android:textSize="15dp"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/txt_jsondata"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:textColor="@color/black"
+                android:textSize="20dp"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>
+
+
+
+ActivityMain.java
+
+import androidx.appcompat.app.AppCompatActivity;
+import android.os.Bundle;
+import android.util.Xml;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
+import org.json.JSONObject;
+import org.xmlpull.v1.XmlPullParser;
+import java.io.InputStream;
+
+public class MainActivity extends AppCompatActivity {
+
+    Button btnXmlParse, btnJsonParse;
+    TextView txtXmlData, txtJsonData;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        BindUiData();
+
+        btnXmlParse.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ReadXmlData();
+            }
+        });
+
+        btnJsonParse.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ReadJsonData();
+            }
+        });
+    }
+
+    private void BindUiData() {
+        btnXmlParse = (Button) findViewById(R.id.btn_xmlparse);
+        btnJsonParse = (Button) findViewById(R.id.btn_jsonparse);
+        txtXmlData = (TextView) findViewById(R.id.txt_xmldata);
+        txtJsonData = (TextView) findViewById(R.id.txt_jsondata);
+    }
+
+    //Google Link to learn more about XmlPullParser
+    //https://developer.android.com/training/basics/network-ops/xml#java
+
+    private void ReadXmlData() {
+        try {
+            //To store all the Data in One Single String
+            StringBuilder stringValue = new StringBuilder();
+
+            //Read File
+            InputStream inputStream = getAssets().open("citydetails.xml");
+
+            //Initialize XML Parser
+            XmlPullParser parser = Xml.newPullParser();
+            parser.setInput(inputStream,null);
+
+            //The method getEventType returns the type of event that happens.
+            //E.g: Document start , tag start e.t.c.
+            int eventType = parser.getEventType();
+
+            //Check and Loop Unit the Document Ends
+            while (eventType != XmlPullParser.END_DOCUMENT) {
+
+                //Store TagName
+                String tagName;
+
+                //Used to do any operation when the Document Start
+                if(eventType == XmlPullParser.START_DOCUMENT) { }
+
+                //Used to do any operation when the Tag Start
+                else if(eventType == XmlPullParser.START_TAG) {
+                    tagName = parser.getName();
+                    if(tagName.equalsIgnoreCase("Details")) {}
+                    else {
+                        //Move to next place
+                        parser.next();
+                        stringValue.append("\n"+tagName+" : "+ parser.getText());
+                    }
+                }
+
+                //Used to do any operation when Tag Ends
+                else if(eventType == XmlPullParser.END_TAG) { }
+
+                //Move to next Place
+                eventType = parser.next();
+            }
+
+            //Set String Builder Value to TextView
+            txtXmlData.setText(stringValue);
+        }
+        catch (Exception ex) { }
+    }
+
+    private void ReadJsonData() {
+        try {
+            //To store all the Data in One Single String
+            StringBuilder stringValue = new StringBuilder();
+
+            //Read File from Asset
+            InputStream inputStream = getAssets().open("citydetails.json");
+
+            //To Check if the File is Empty or Not. Empty File the Size will be 0KB
+            int size = inputStream.available();
+
+            //Converting to Byte[] so can convert the File Content to string
+            byte[] buffer = new byte[size];
+            inputStream.read(buffer);
+            inputStream.close();
+
+            //Convert the Byte[] to String
+            String fileData = new String(buffer, "UTF-8");
+
+            //Declare a Json Object
+            JSONObject jsonObject = new JSONObject(fileData);
+
+            String cityName = jsonObject.getJSONObject("Details").getString("City_Name");
+            if(cityName.length() > 0) {
+                stringValue.append("\n"+"City_Name :"+ cityName);
+            }
+
+            String latitude = jsonObject.getJSONObject("Details").getString("Latitude");
+            if(latitude.length() > 0) {
+                stringValue.append("\n"+"Latitude :"+ latitude);
+            }
+
+            String longitude = jsonObject.getJSONObject("Details").getString("Longitude");
+            if(longitude.length() > 0) {
+                stringValue.append("\n"+"Longitude :"+ longitude);
+            }
+
+            String temperature = jsonObject.getJSONObject("Details").getString("Temperature");
+            if(temperature.length() > 0) {
+                stringValue.append("\n"+"Temperature :"+ temperature);
+            }
+
+            String humidity = jsonObject.getJSONObject("Details").getString("Humidity");
+            if(humidity.length() > 0) {
+                stringValue.append("\n"+"Humidity :"+ humidity);
+            }
+
+            txtJsonData.setText(stringValue);
+        }
+        catch (Exception ex) {
+            Toast.makeText(this, ex.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+    }
+}
+
+
+CityDetail.json
+
+{
+  "Details": {
+    "City_Name":"Bangalore",
+    "Latitude":"12.9716 N",
+    "Longitude":"77.5946 E",
+    "Temperature":"24 C",
+    "Humidity":"79%"
+  }
+}
+
+
+XML
+
+
+<?xml version="1.0" encoding="UTF-8"?>
+<cities>
+    <city>
+        <City_name>Mysore</City_name>
+        <Latitude>12.295</Latitude>
+        <Longitude>76.639</Longitude>
+        <Temperature>22</Temperature>
+        <Humidity>90%</Humidity>
+    </city>
+
+    <city>
+        <City_name>Mangaluru</City_name>
+        <Latitude>15.295</Latitude>
+        <Longitude>70.639</Longitude>
+        <Temperature>24</Temperature>
+        <Humidity>70%</Humidity>
+    </city>
+</cities>
