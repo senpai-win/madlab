@@ -38,6 +38,7 @@ Activity.xml
 
 Activity.java
 
+package com.example.visitingcard;
 import androidx.appcompat.app.AppCompatActivity;
 import android.app.WallpaperManager;
 import android.content.res.AssetManager;
