@@ -1,0 +1,466 @@
+AndroidManifest.xml
+
+<uses-permission android:name="android.permission.CALL_PHONE"/>
+
+
+strings.xml
+
+<string name="one">1</string>
+<string name="two">2</string>
+<string name="three">3</string>
+<string name="four">4</string>
+<string name="five">5</string>
+<string name="six">6</string>
+<string name="seven">7</string>
+<string name="eight">8</string>
+<string name="nine">9</string>
+<string name="zero">0</string>
+
+colors.xml
+
+<color name="bluegray">#96b9f2</color>
+
+activity_main.xml
+
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:background="@color/white">
+
+    <EditText
+        android:id="@+id/callcontact_txt_valuetext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/callcontact_lyt_rowOne"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="50dp"
+        android:autofillHints="false"
+        android:hint="|"
+        android:inputType="none"
+        android:maxLength="11"
+        android:textAlignment="textEnd"
+        android:textColor="@color/black"
+        android:textSize="30dp"
+        android:textStyle="bold"
+        tools:ignore="LabelFor" />
+
+    <LinearLayout
+        android:id="@+id/callcontact_lyt_rowOne"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="3"
+        android:layout_above="@id/callcontact_lyt_rowTwo"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp">
+
+        <Button
+            android:id="@+id/callcontact_btn_One"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_margin="2dp"
+            android:layout_weight="1"
+            android:backgroundTint="@color/bluegray"
+            android:textColor="@color/black"
+            android:text="@string/one"
+            android:textSize="25dp"
+            style="?android:attr/buttonBarButtonStyle"
+            android:onClick="numberClick"/>
+
+        <Button
+            android:id="@+id/callcontact_btn_Two"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_margin="2dp"
+            android:layout_weight="1"
+            android:backgroundTint="@color/bluegray"
+            android:textColor="@color/black"
+            android:text="@string/two"
+            android:textSize="25dp"
+            style="?android:attr/buttonBarButtonStyle"
+            android:onClick="numberClick"/>
+
+        <Button
+            android:id="@+id/callcontact_btn_Three"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_margin="2dp"
+            android:layout_weight="1"
+            android:backgroundTint="@color/bluegray"
+            android:textColor="@color/black"
+            android:text="@string/three"
+            android:textSize="25dp"
+            style="?android:attr/buttonBarButtonStyle"
+            android:onClick="numberClick"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/callcontact_lyt_rowTwo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="3"
+        android:layout_above="@id/callcontact_lyt_rowThree"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp">
+
+        <Button
+            android:id="@+id/callcontact_btn_four"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_margin="2dp"
+            android:layout_weight="1"
+            android:backgroundTint="@color/bluegray"
+            android:textColor="@color/black"
+            android:text="@string/four"
+            android:textSize="25dp"
+            style="?android:attr/buttonBarButtonStyle"
+            android:onClick="numberClick"/>
+
+        <Button
+            android:id="@+id/callcontact_btn_five"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_margin="2dp"
+            android:layout_weight="1"
+            android:backgroundTint="@color/bluegray"
+            android:textColor="@color/black"
+            android:text="@string/five"
+            android:textSize="25dp"
+            style="?android:attr/buttonBarButtonStyle"
+            android:onClick="numberClick"/>
+
+        <Button
+            android:id="@+id/callcontact_btn_six"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_margin="2dp"
+            android:layout_weight="1"
+            android:backgroundTint="@color/bluegray"
+            android:textColor="@color/black"
+            android:text="@string/six"
+            android:textSize="25dp"
+            style="?android:attr/buttonBarButtonStyle"
+            android:onClick="numberClick"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/callcontact_lyt_rowThree"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="3"
+        android:layout_above="@id/callcontact_lyt_rowFour"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp">
+
+        <Button
+            android:id="@+id/callcontact_btn_seven"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_margin="2dp"
+            android:layout_weight="1"
+            android:backgroundTint="@color/bluegray"
+            android:textColor="@color/black"
+            android:text="@string/seven"
+            android:textSize="25dp"
+            style="?android:attr/buttonBarButtonStyle"
+            android:onClick="numberClick"/>
+
+        <Button
+            android:id="@+id/callcontact_btn_eight"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_margin="2dp"
+            android:layout_weight="1"
+            android:backgroundTint="@color/bluegray"
+            android:text="@string/eight"
+            android:textColor="@color/black"
+            android:textSize="25dp"
+            android:onClick="numberClick"/>
+
+        <Button
+            android:id="@+id/callcontact_btn_nine"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_margin="2dp"
+            android:layout_weight="1"
+            android:backgroundTint="@color/bluegray"
+            android:text="@string/nine"
+            android:textColor="@color/black"
+            android:textSize="25dp"
+            android:onClick="numberClick"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/callcontact_lyt_rowFour"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="3"
+        android:layout_above="@id/callcontact_lyt_actionbutton"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp">
+
+        <Button
+            android:id="@+id/callcontact_btn_star"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_margin="2dp"
+            android:layout_weight="1"
+            android:backgroundTint="@color/bluegray"
+            android:textColor="@color/black"
+            android:text="*"
+            android:textSize="25dp"
+            style="?android:attr/buttonBarButtonStyle"
+            android:onClick="numberClick" />
+
+        <Button
+            android:id="@+id/callcontact_btn_zero"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_margin="2dp"
+            android:layout_weight="1"
+            android:backgroundTint="@color/bluegray"
+            android:text="@string/zero"
+            android:textColor="@color/black"
+            android:textSize="25dp"
+            android:onClick="numberClick"/>
+
+        <Button
+            android:id="@+id/callcontact_btn_ash"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_margin="2dp"
+            android:layout_weight="1"
+            android:backgroundTint="@color/bluegray"
+            android:textColor="@color/black"
+            android:text="#"
+            android:textSize="25dp"
+            style="?android:attr/buttonBarButtonStyle"
+            android:onClick="numberClick"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/callcontact_lyt_actionbutton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        android:weightSum="3"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="10dp">
+
+        <Button
+            android:id="@+id/callcontact_btn_call"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_margin="2dp"
+            android:text="Call"
+            android:textSize="20dp"
+            android:layout_weight="1"
+            android:backgroundTint="@color/purple_700" />
+
+        <Button
+            android:id="@+id/callcontact_btn_save"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_margin="2dp"
+            android:text="SAVE"
+            android:textSize="20dp"
+            android:layout_weight="1"
+            android:backgroundTint="@color/purple_700"/>
+
+        <Button
+            android:id="@+id/callcontact_btn_clear"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_margin="2dp"
+            android:text="CLEAR"
+            android:textSize="20dp"
+            android:layout_weight="1" />
+
+    </LinearLayout>
+
+</RelativeLayout>
+
+
+MainActivity.java
+
+import static android.Manifest.permission.CALL_PHONE;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
+import android.os.Build;
+import android.os.Bundle;
+import android.provider.ContactsContract;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
+
+public class MainActivity extends AppCompatActivity {
+
+    Button btnCall, btnSave, btnClear;
+    EditText txtValue;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        BindUiElements();
+
+        //Disable the Keyboard when clicked on the Edit Text
+        txtValue.setShowSoftInputOnFocus(false);
+
+        btnCall.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MakeCall();
+            }
+        });
+
+        btnSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SaveContact();
+            }
+        });
+
+        btnClear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                txtValue.setText("");
+            }
+        });
+    }
+
+    private void BindUiElements() {
+        btnCall = (Button) findViewById(R.id.callcontact_btn_call);
+        btnSave = (Button) findViewById(R.id.callcontact_btn_save);
+        txtValue = (EditText) findViewById(R.id.callcontact_txt_valuetext);
+        btnClear = (Button) findViewById(R.id.callcontact_btn_clear);
+    }
+
+    public void numberClick(View view) {
+
+        String value = txtValue.getText().toString();
+
+        switch(view.getId()) {
+            case R.id.callcontact_btn_zero:
+                value += "0";
+                break;
+
+            case R.id.callcontact_btn_One:
+                value += "1";
+                break;
+
+            case R.id.callcontact_btn_Two:
+                value += "2";
+                break;
+
+            case R.id.callcontact_btn_Three:
+                value += "3";
+                break;
+
+            case R.id.callcontact_btn_four:
+                value += "4";
+                break;
+
+            case R.id.callcontact_btn_five:
+                value += "5";
+                break;
+
+            case R.id.callcontact_btn_six:
+                value += "6";
+                break;
+
+            case R.id.callcontact_btn_seven:
+                value += "7";
+                break;
+
+            case R.id.callcontact_btn_eight:
+                value += "8";
+                break;
+
+            case R.id.callcontact_btn_nine:
+                value += "9";
+                break;
+
+            case R.id.callcontact_btn_ash:
+                value += "#";
+                break;
+
+            case R.id.callcontact_btn_star:
+                value += "*";
+                break;
+        }
+        txtValue.setText(value);
+    }
+
+    private void MakeCall() {
+        try {
+            if(txtValue.length() >0) {
+                //Activate the Call UI Screen of OS
+                Intent intent = new Intent(Intent.ACTION_CALL);
+                //Pass the Phone Number
+                intent.setData(Uri.parse("tel:"+txtValue.getText().toString()));
+
+                //Runtime Permission check -> Popup shows Allow , Not now. OS screen for Runtime Permission
+                if (ContextCompat.checkSelfPermission(getApplicationContext(), CALL_PHONE) ==
+                        PackageManager.PERMISSION_GRANTED) {
+                    startActivity(intent);
+                }
+                else {
+                    //Request Permission only if greater than equal to M version , depricated in below version
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                        requestPermissions(new String[]{CALL_PHONE}, 1);
+                    }
+                }
+            }
+        }
+        catch (Exception ex) {
+            Toast.makeText(this, "ex :"+ex.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void SaveContact() {
+
+        //https://developer.android.com/training/contacts-provider/modify-data.html
+        //https://stackoverflow.com/questions/4744187/how-to-add-new-contacts-in-android
+
+        try {
+            //Activate the Save Screen UI Screen of OS
+            Intent intent = new Intent(ContactsContract.Intents.Insert.ACTION);
+            intent.setType(ContactsContract.RawContacts.CONTENT_TYPE);
+
+            //Pass Extras with other Default text like Email, Work Phone, Home Phone etc.
+            //intent.putExtra(ContactsContract.Intents.Insert.NAME, "A Sample Contact");
+
+            intent.putExtra(ContactsContract.Intents.Insert.PHONE, txtValue.getText().toString());
+
+            startActivity(intent);
+        }
+        catch (Exception ex) {
+            Toast.makeText(this, "ex:"+ex.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+    }
+}
+	
+	
