@@ -97,21 +97,21 @@ public class ChangeWallpaperActivity extends AppCompatActivity {
                String[] 
                 wallpaperFileName = assetManager.list("wallpapers");
 
-                //Generate a Random Number between 0 and Total Number of File available in the folder
+
                 int randomNumber = new Random().nextInt(wallpaperFileName.length);
                 
-                //WallpaperManager responsible for changing or assigning Wallpaper to phone programmatically 
+
                 WallpaperManager wallpaperManager = WallpaperManager.getInstance(getApplicationContext());
 
                 InputStream inputStream = assetManager.open("wallpapers/"+wallpaperFileName[randomNumber]);
                 Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
-                //Assing the Bitmap image to Wallpaper
+
                 wallpaperManager.setBitmap(bitmap);
                 
-                //Assign to Image View -> Optional only if needed
+
                 imgView.setImageBitmap(bitmap);
 
-                //Repeat the same task after a regular interval. Time in MilliSec 
+
                 handler.postDelayed(this,30000);
             }
             catch (Exception ex) {
